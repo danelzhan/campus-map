@@ -1,9 +1,17 @@
 import { useRef, useEffect } from 'react'
 import mapboxgl from 'mapbox-gl'
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import './App.css'
+
+import ProfileButton from './components/profile';
+import NavBar from './components/nav';
+
+const Home = () => <h2>Home Page</h2>;
+const About = () => <h2>About Page</h2>;
+const NotFound = () => <h2>404 - Page Not Found</h2>;
 
 function App() {
 
@@ -28,7 +36,35 @@ function App() {
 
   return (
     <>
-      <div id='map-container' ref={mapContainerRef}/>
+      <div id='map-container' ref={mapContainerRef}> 
+
+        <div id='ui'>
+          <Router>
+            
+            <ProfileButton />
+          
+            <NavBar id='button' />
+
+          </Router>
+
+          <div id='box' />
+
+        </div>
+
+      </div>
+
+      <Router>
+      <nav>
+        <Link to="/">Home</Link> | <Link to="/about">About</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
+
     </>
   )
 }
