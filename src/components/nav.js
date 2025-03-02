@@ -3,6 +3,11 @@ import friends from '../icons/friends.svg'
 import compass from '../icons/compass.svg'
 import event from '../icons/event.svg'
 
+import Menu from '@mui/joy/Menu';
+import MenuButton from '@mui/joy/MenuButton';
+import MenuItem from '@mui/joy/MenuItem';
+import Dropdown from '@mui/joy/Dropdown';
+
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 
 const NavBar= () => {

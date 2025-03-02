@@ -10,6 +10,7 @@ import './App.css'
 import ProfileButton from './components/profile_button';
 import NavBar from './components/nav';
 import ProfileCard from './pages/profile';
+import Button from '@mui/joy/Button';
 
 function App() {
 
@@ -24,6 +25,8 @@ function App() {
   const [center, setCenter] = useState(INITIAL_CENTER)
   const [zoom, setZoom] = useState(INITIAL_ZOOM)
   const [pitch, setPitch] = useState(45)
+
+  const x = "hi"
 
   
 
@@ -75,12 +78,12 @@ function App() {
 
   return (
     <>
-      <div CLASSnAME="sidebar">
+      <div className="sidebar">
        Longitude: {center [0].toFixed(4)} | Latitude: {center[1].toFixed(4)} | Zoom: {zoom.toFixed(2)}
       </div>
-      <button className ='reset-button' onClick ={handleButtonClick}>
+      <Button className ='reset_button' onClick ={handleButtonClick}>
       Reset
-      </button>
+      </Button>
       <div id='map-container' ref={mapContainerRef}> 
 
         <div id='ui'>
