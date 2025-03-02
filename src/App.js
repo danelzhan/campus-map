@@ -26,6 +26,7 @@ function App() {
   const [zoom, setZoom] = useState(INITIAL_ZOOM)
   const [pitch, setPitch] = useState(45)
 
+  const x = "hi"
 
   
 
