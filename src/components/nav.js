@@ -3,6 +3,8 @@ import friends from '../icons/friends.svg'
 import compass from '../icons/compass.svg'
 import event from '../icons/event.svg'
 
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
+
 const NavBar= () => {
     return (
         <div id="nav">
@@ -10,9 +12,11 @@ const NavBar= () => {
             <div class="nav_button">
                 <img src={friends}/>
             </div>
-            <div class="nav_button">
-                <img src={compass}/>
-            </div>
+            <Link class="nav_button" to="/home">
+                <div >
+                    <img src={compass}/>
+                </div>
+            </Link>
             <div class="nav_button">
                 <img src={event}/>
             </div>
