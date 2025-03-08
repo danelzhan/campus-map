@@ -9,97 +9,35 @@
 #map-container {
   height: 100%;
   width: 100%;
-  /* temporarily set the background color so we can tell where the map container is positioned */
-  background-color: lightgrey;
-  z-index: 1;
+
+  z-index: 0;
   display: flex;
   flex-direction: column;
+  position: absolute;
 }
 
-.sidebar {
-  background-color: rgb(35 55 75 / 90%);
-  color: #fff;
-  padding: 6px 12px;
-  font-family: monospace;
-  z-index: 5;
+.navigation_bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.profile_button {
   position: absolute;
   top: 0;
   left: 0;
-  margin: 12px;
-  border-radius: 4px;
+  padding: 1rem;
+  z-index: 1;
 }
 
-.reset_button {
+.app_screen {
   position: absolute;
-  z-index: 5;
-}
-
-#profile_button {
-  border: 1px solid black;
-  min-height: fit-content;
-  pointer-events: auto;
-}
-
-#nav {
-  position: absolute;
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  justify-content: space-evenly;
-  min-height: 6vh;
-  width: 100%;
-  pointer-events: auto; 
-  bottom: 0;
-  border: 1px solid red;
-}
-
-.nav_button {
-  border: 1px solid blue;
-  width: 100%;
-  text-align: center;
-  display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  background-color: black;
-}
-
-.nav_button:hover {
-  border: 1px solid blue;
-  width: 100%;
-  text-align: center;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: #72b7b9;
-}
-
-#ui {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: none;
-  z-index: 2;
-  pointer-events: none; 
-}
-
-#profile_button {
-  position: absolute;
-  right: 0;
-}
-
-#profile_card {
-  height: 60vh;
-  width: 94vw;
-  border: 1px solid black;
-  background-color: #72b7b9;
-  margin-left: 3vw;
-  margin-right: 3vw;
-  border-radius: 30px;
-}
-
-#user_profile_image {
-  height: 20vh;
-  width: 20vh;
-
-  border-radius: 10vh;
-
-  background-color: purple;
+  
 }

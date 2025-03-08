@@ -1,33 +1,42 @@
-import { useRef, useEffect } from 'react'
-import friends from '../icons/friends.svg'
-import compass from '../icons/compass.svg'
-import event from '../icons/event.svg'
+import * as React from 'react';
+import { Navigate, useNavigate } from "react-router-dom";
 
-import Menu from '@mui/joy/Menu';
-import MenuButton from '@mui/joy/MenuButton';
-import MenuItem from '@mui/joy/MenuItem';
-import Dropdown from '@mui/joy/Dropdown';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+
+import Box from '@mui/material/Box';
+import GroupIcon from '@mui/icons-material/Group';
+import GlobeIcon from '@mui/icons-material/Public';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 
 const NavBar= () => {
+
+    const navigate = useNavigate();
+    const HandleFriend = () => {
+        navigate('/friends');
+    };
+    const HandleMap = () => {
+        navigate('/main');
+    };
+
+    const [value, setValue] = React.useState(0);
+
     return (
-        <div id="nav">
-
-            <div class="nav_button">
-                <img src={friends}/>
-            </div>
-            <Link class="nav_button" to="/home">
-                <div >
-                    <img src={compass}/>
-                </div>
-            </Link>
-            <div class="nav_button">
-                <img src={event}/>
-            </div>
-
-
-        </div>
+        <Box className="navigation_bar" sx={{ width: '100vw' }}>
+            <BottomNavigation
+            showLabels
+            value={value}
+            onChange={(event, newValue) => {
+                setValue(newValue);
+            }}
+            >
+            <BottomNavigationAction onClick={HandleFriend} label="" icon={<GroupIcon />} />
+            <BottomNavigationAction onClick={HandleMap} label="" icon={<GlobeIcon />} />
+            <BottomNavigationAction label="" icon={<EventAvailableIcon />} />
+            </BottomNavigation>
+        </Box>
     );
 };
 

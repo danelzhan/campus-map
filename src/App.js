@@ -1,113 +1,60 @@
-import { useRef, useEffect, useState} from 'react'
-import mapboxgl from 'mapbox-gl'
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-
+import { useRef, useEffect, useState } from 'react';
+import mapboxgl from 'mapbox-gl';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import 'mapbox-gl/dist/mapbox-gl.css';
+import './App.css';
 
-import './App.css'
+import LoginPage from "./pages/login_page.jsx";
+import FriendsPage from "./pages/friends_page.jsx";
+import UserPage from "./pages/user_page.jsx";
+import RegisterPage from "./pages/register_page.jsx";
 
-import ProfileButton from './components/profile_button';
-import NavBar from './components/nav';
-import ProfileCard from './pages/profile';
-import Button from '@mui/joy/Button';
+import NavBar from "./components/nav.js";
+import ProfileButton from './components/profile_button.js';
+import Map from "./components/map.js";
+
+import Box from '@mui/material/Box';
+import { ThemeProvider } from '@mui/material/styles';
+
+import User from './objects/user.js';
+import CurrentUser from './objects/current_user.js';
+
+const MawdsCoords = [-123.25948140418379, 49.26482780906703];
+const IKBCoords = [-123.25263272110878, 49.26748965227982];
+const FredKaiserCoords = [-123.2500396163436, 49.262310502398094];
+
+var Daniel = new User(1, "danelzha", "Daniel", "Zhang",  MawdsCoords);
+var Darius = new User(2, "daralex", "Darius", "Alexander", IKBCoords);
+var Tabreek = new User(3, "tabbz", "Tabreek", "Somani", FredKaiserCoords);
+
+const current_user_1 = new CurrentUser(1, "danelzha", "Daniel", "Zhang", MawdsCoords, [Darius, Tabreek]);
+const current_user_2 = new CurrentUser(4, "skibbers", "Big", "Dawg", IKBCoords, [Darius, Tabreek, Daniel]);
+const current_user_null = new CurrentUser(0, "null", "null", "", [0,0], []);
+
+const current_user = current_user_null;
+
+var UserList = [Daniel, Darius, Tabreek];
 
 function App() {
 
-  const mapRef = useRef()
-  const mapContainerRef = useRef()
-
-  const INITIAL_CENTER =  [-123.25470,49.26550]
-  const INITIAL_ZOOM = 16.4
-  const INITIAL_PITCH = 60
-  
-
-  const [center, setCenter] = useState(INITIAL_CENTER)
-  const [zoom, setZoom] = useState(INITIAL_ZOOM)
-  const [pitch, setPitch] = useState(45)
-
-  const x = "hi"
-
-  
-
-  useEffect(() => {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZW5sdWlhIiwiYSI6ImNtN3BuOGVsOTBva3Uyc29ucHRxOG9xMjgifQ.cPVYjBs8F4tZ_TwITYqmEg'
-    mapRef.current = new mapboxgl.Map({
-      container: mapContainerRef.current,
-      center: [-123.25470,49.26550],
-      zoom: 16.4,
-      pitch: 60,
-      
-    });
-
-    mapRef.current.on('move', () => {
-      // get the current center coordinates and zoom level from the map
-      const mapCenter = mapRef.current.getCenter()
-      const mapZoom = mapRef.current.getZoom()
-      const mapPitch = mapRef.current.getPitch()
-
-      // update state
-      setCenter([ mapCenter.lng, mapCenter.lat ])
-      setZoom(mapZoom)
-
-      // Geolocate
-      mapRef.current.addControl(
-        new mapboxgl.GeolocateControl({
-          positionOptions: {
-            enableHighAccuracy: true
-          },
-          trackUserLocation: true,
-          showUserLocation: true
-        })
-      )
-    })
-
-    return () => {
-      mapRef.current.remove()
-    }
-  }, [])
-
-  const handleButtonClick = () => {
-    mapRef.current.flyTo({
-      center: INITIAL_CENTER,
-      zoom: INITIAL_ZOOM,
-      pitch: INITIAL_PITCH
-    })
-  }
-  
-
   return (
-    <>
-      <div className="sidebar">
-       Longitude: {center [0].toFixed(4)} | Latitude: {center[1].toFixed(4)} | Zoom: {zoom.toFixed(2)}
-      </div>
-      <Button className ='reset_button' onClick ={handleButtonClick}>
-      Reset
-      </Button>
-      <div id='map-container' ref={mapContainerRef}> 
+    <Box className='app_screen'>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/main" element={<Map height={'100%'} map_center={[-123.25470,49.26550]}/>} />
+          <Route path="/friends" element={<FriendsPage friendsList={current_user.friends}/>} />
+          <Route path="/user/:uid" element={<UserPage userList={UserList} />} />
+        </Routes>
 
-        <div id='ui'>
-          <Router>
-            
-            <ProfileButton />
-          
-            <NavBar />
-
-            <Routes>
-            <Route path="/home" />
-              <Route path="/profile" element={<ProfileCard />} />
-            </Routes>
-
-          </Router>
-
-          <div id='box' />
-
-        </div>
-
-      </div>
-
-    </>
-  )
+        <ProfileButton user={current_user} />
+        <NavBar />
+      </Router>
+    </Box>
+  );
 }
- 
-export default App
+
+export default App;
