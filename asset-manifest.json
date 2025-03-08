@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/campus-map/static/css/main.b21536a1.css",
+    "main.js": "/campus-map/static/js/main.d7593fe8.js",
+    "static/js/453.566b6941.chunk.js": "/campus-map/static/js/453.566b6941.chunk.js",
+    "index.html": "/campus-map/index.html",
+    "main.b21536a1.css.map": "/campus-map/static/css/main.b21536a1.css.map",
+    "main.d7593fe8.js.map": "/campus-map/static/js/main.d7593fe8.js.map",
+    "453.566b6941.chunk.js.map": "/campus-map/static/js/453.566b6941.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b21536a1.css",
+    "static/js/main.d7593fe8.js"
+  ]
+}
